@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark" data-accent="lime" data-density="comfortable" data-motion="on">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080a0c" id="themeColorMeta">
+  <meta name="description" content="震纤软件库：认真试用，再认真推荐。一个关于好软件的独立策展空间，内置账号、真实评价与个性化。">
+  <title>震纤软件库 · 把好软件留在手边</title>
+  <script src="/boot.js"></script>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="ambient ambient--one" aria-hidden="true"></div>
+  <div class="ambient ambient--two" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="震纤软件库首页">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M6 25.5c4.2-13.2 7.7 7.4 12.1-3.4 3.4-8.3 6.3 4.2 9.7-5.1" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M7.5 31.5h25" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".55"/>
+            <circle cx="31.5" cy="9.5" r="2.1" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>震纤软件库</strong>
+          <small>ZHENXIAN LIBRARY</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="主导航">
+        <button class="nav-link is-active" type="button" data-scroll-target="top">发现</button>
+        <button class="nav-link" type="button" data-scroll-target="library">软件库</button>
+        <button class="nav-link" type="button" id="navFavorites">
+          收藏
+          <span class="nav-count" id="navFavoriteCount" hidden>0</span>
+        </button>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-button" type="button" id="prefsButton" aria-label="个性化设置" title="个性化设置">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <path d="M4 7h9M17 7h3M4 17h3M11 17h9"/>
+            <circle cx="15" cy="7" r="2"/>
+            <circle cx="9" cy="17" r="2"/>
+          </svg>
+        </button>
+        <button class="icon-button theme-button" type="button" id="themeButton" aria-label="切换明暗主题" title="切换明暗主题">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/>
+          </svg>
+        </button>
+        <button class="button button--ink login-button" type="button" id="loginButton">登录</button>
+
+        <div class="user-area" id="userArea" hidden>
+          <button class="avatar-button" type="button" id="accountButton" aria-label="打开个人中心" aria-expanded="false">
+            <span class="avatar avatar--button" id="headerAvatar">林</span>
+            <span class="online-dot" aria-hidden="true"></span>
+          </button>
+          <div class="account-popover" id="accountMenu" hidden>
+            <div class="account-popover-head">
+              <span class="avatar avatar--small" id="menuAvatar">林</span>
+              <span>
+                <strong id="menuName">林墨</strong>
+                <small id="menuUsername">@demo</small>
+              </span>
+            </div>
+            <div class="popover-rule"></div>
+            <button type="button" id="menuProfile">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3.2-6 7-6s6.2 2 7 6"/></svg>
+              个人资料
+            </button>
+            <button type="button" id="menuFavorites">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.8 5.7c-2-2-5.2-2-7.2 0L12 7.3l-1.6-1.6a5.1 5.1 0 0 0-7.2 7.2L12 21l8.8-8.1a5.1 5.1 0 0 0 0-7.2Z"/></svg>
+              我的收藏
+              <span class="popover-count" id="menuFavoriteCount">0</span>
+            </button>
+            <button type="button" id="menuPrefs">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg>
+              外观与个性化
+            </button>
+            <div class="popover-rule"></div>
+            <button type="button" class="popover-danger" id="logoutButton">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 4H5v16h4M14 8l4 4-4 4M18 12H9"/></svg>
+              退出登录
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero section-shell" id="top">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          独立策展 · 2026 秋季刊
+          <span class="eyebrow-divider" aria-hidden="true"></span>
+          VOL. 04
+        </div>
+        <h1 class="hero-title">把好软件，<br><span>留在手边。</span></h1>
+        <p class="hero-lede">
+          我们亲手试用、长期观察，只收录那些真正值得留在桌面上的工具。
+          <span>没有推广位，没有暗箱排名。</span>
+        </p>
+
+        <form class="global-search" id="searchForm" role="search">
+          <span class="global-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
+              <circle cx="10.8" cy="10.8" r="6.3"/><path d="m15.5 15.5 4.2 4.2"/>
+            </svg>
+          </span>
+          <input
+            id="searchInput"
+            type="search"
+            name="q"
+            placeholder="搜索软件、场景或关键词"
+            aria-label="搜索软件、场景或关键词"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <kbd class="search-kbd" aria-hidden="true">/</kbd>
+          <button class="search-submit" type="submit" aria-label="开始搜索">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+          </button>
+        </form>
+
+        <div class="quick-searches" aria-label="热门搜索">
+          <span>试试看</span>
+          <button type="button" data-query="本地优先">本地优先</button>
+          <button type="button" data-query="截图">截图</button>
+          <button type="button" data-query="开源">开源</button>
+          <button type="button" data-query="macOS">macOS</button>
+        </div>
+
+        <dl class="hero-metrics">
+          <div>
+            <dt>收录工具</dt>
+            <dd><span id="metricSoftware">—</span><small>款</small></dd>
+          </div>
+          <div>
+            <dt>真实评价</dt>
+            <dd><span id="metricComments">—</span><small>条</small></dd>
+          </div>
+          <div>
+            <dt>更新频率</dt>
+            <dd><span>每周</span><small>四</small></dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="hero-stage" aria-label="本周编辑精选">
+        <div class="stage-grid" aria-hidden="true"></div>
+        <div class="stage-orbit stage-orbit--a" aria-hidden="true"></div>
+        <div class="stage-orbit stage-orbit--b" aria-hidden="true"></div>
+        <div class="stage-kicker"><span>THIS WEEK'S PICK</span><span id="heroPickNo">#001</span></div>
+
+        <article class="hero-pick" id="heroPick" tabindex="0" role="button" aria-label="查看本周编辑精选">
+          <div class="hero-pick-top">
+            <span class="hero-pick-label"><i></i> 编辑选择</span>
+            <span class="hero-pick-corner">ZX / 01</span>
+          </div>
+          <div class="hero-pick-icon" id="heroPickIcon" aria-hidden="true"></div>
+          <div class="hero-pick-copy">
+            <p class="hero-pick-category" id="heroPickCategory">效率</p>
+            <h2 id="heroPickName">Obsidian</h2>
+            <p id="heroPickTagline">让想法自然生长为知识网络。</p>
+          </div>
+          <div class="hero-pick-footer">
+            <div class="hero-pick-rating">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 2.8 2.7 5.7 6.2.8-4.6 4.3 1.2 6.1-5.5-3-5.5 3 1.2-6.1L3.1 9.3l6.2-.8L12 2.8Z"/></svg>
+              <strong id="heroPickRating">4.8</strong>
+              <span>· <em id="heroPickComments">4</em> 条评价</span>
+            </div>
+            <span class="hero-pick-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </span>
+          </div>
+          <span class="hero-pick-ghost" id="heroPickGhost" aria-hidden="true">O</span>
+          <span class="hero-pick-fiber" aria-hidden="true"></span>
+        </article>
+
+        <button class="float-pick float-pick--one" type="button" id="floatPickOne">
+          <span class="float-pick-icon" id="floatPickOneIcon"></span>
+          <span class="float-pick-copy"><small>同样值得</small><strong id="floatPickOneName">Raycast</strong></span>
+          <span class="float-pick-arrow">↗</span>
+        </button>
+        <button class="float-pick float-pick--two" type="button" id="floatPickTwo">
+          <span class="float-pick-icon" id="floatPickTwoIcon"></span>
+          <span class="float-pick-copy"><small>同样值得</small><strong id="floatPickTwoName">Blender</strong></span>
+          <span class="float-pick-arrow">↗</span>
+        </button>
+        <p class="stage-caption"><span></span> 30 天真实使用</p>
+      </div>
+    </section>
+
+    <div class="manifesto-strip" aria-hidden="true">
+      <div class="strip-track">
+        <span>人工试用 30 天</span><i>✦</i><span>无广告排名</span><i>✦</i><span>真实用户评价</span><i>✦</i><span>数据留在本地</span><i>✦</i><span>每周四更新</span><i>✦</i>
+        <span>人工试用 30 天</span><i>✦</i><span>无广告排名</span><i>✦</i><span>真实用户评价</span><i>✦</i><span>数据留在本地</span><i>✦</i><span>每周四更新</span><i>✦</i>
+      </div>
+    </div>
+
+    <section class="section-shell section curated" id="curated">
+      <header class="section-head">
+        <div class="section-title">
+          <span class="section-index">01</span>
+          <div>
+            <p class="section-kicker">CURATED</p>
+            <h2>编辑精选</h2>
+          </div>
+        </div>
+        <p class="section-note">不追热点，只留下经得起时间的选择。</p>
+        <button class="text-link" type="button" data-scroll-target="library">浏览全部 <span>↗</span></button>
+      </header>
+      <div class="curated-grid" id="curatedGrid">
+        <div class="skeleton skeleton--spotlight"></div>
+        <div class="skeleton skeleton--mini"></div>
+        <div class="skeleton skeleton--mini"></div>
+      </div>
+    </section>
+
+    <section class="section-shell section library" id="library">
+      <header class="section-head">
+        <div class="section-title">
+          <span class="section-index">02</span>
+          <div>
+            <p class="section-kicker">THE LIBRARY</p>
+            <h2>软件库</h2>
+          </div>
+        </div>
+        <p class="section-note">按你的工作方式，找到下一件趁手工具。</p>
+        <span class="library-stamp">ALL KILLER<br>NO FILLER</span>
+      </header>
+
+      <div class="library-toolbar">
+        <div class="category-tabs" id="categoryTabs" role="group" aria-label="按分类筛选">
+          <button class="filter-chip is-active" type="button" data-category="">全部</button>
+        </div>
+        <div class="filter-controls">
+          <div class="platform-tabs" id="platformTabs" role="group" aria-label="按平台筛选">
+            <button class="platform-chip is-active" type="button" data-platform="">全部平台</button>
+            <button class="platform-chip" type="button" data-platform="Windows">Windows</button>
+            <button class="platform-chip" type="button" data-platform="macOS">macOS</button>
+            <button class="platform-chip" type="button" data-platform="Linux">Linux</button>
+            <button class="platform-chip" type="button" data-platform="Web">Web</button>
+          </div>
+          <label class="sort-control">
+            <span>排序</span>
+            <select id="sortSelect" aria-label="排序方式">
+              <option value="curated">编辑推荐</option>
+              <option value="popular">热度最高</option>
+              <option value="rating">评分最高</option>
+              <option value="newest">最新收录</option>
+            </select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+          </label>
+        </div>
+      </div>
+
+      <div class="results-row">
+        <p id="resultSummary">正在整理软件库…</p>
+        <button class="clear-filters" type="button" id="clearFilters" hidden>清除筛选 <span>×</span></button>
+      </div>
+
+      <div class="app-grid" id="appGrid">
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+        <div class="skeleton skeleton--card"></div>
+      </div>
+
+      <div class="empty-results" id="emptyResults" hidden>
+        <span class="empty-orbit" aria-hidden="true"></span>
+        <p class="section-kicker">NOTHING FOUND</p>
+        <h3>没有找到匹配的软件。</h3>
+        <p>换个关键词，或清除当前筛选条件再看看。</p>
+        <button class="button button--primary" type="button" id="emptyReset">重置搜索</button>
+      </div>
+    </section>
+
+    <section class="section-shell section editorial" id="about">
+      <div class="editorial-lead">
+        <p class="section-kicker">03 / WHY ZHENXIAN</p>
+        <blockquote>“工具应该把复杂<br>留给自己，把安静<br>交给使用者。”</blockquote>
+        <p class="editorial-intro">震纤不是下载站。这里更像一本会持续更新的私人工具志，每一条推荐、每一句评价，都有具体的来处。</p>
+      </div>
+      <div class="principles">
+        <article class="principle">
+          <span class="principle-no">01</span>
+          <div class="principle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.5V12l3 2"/></svg>
+          </div>
+          <h3>先使用，再推荐</h3>
+          <p>每款软件至少经过 30 天真实使用。不写参数复读，只记录它如何进入日常，又在哪里让人犹豫。</p>
+        </article>
+        <article class="principle">
+          <span class="principle-no">02</span>
+          <div class="principle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8.5 8.5 0 0 1-3.3-.7L4 19l1.1-3.7A7.4 7.4 0 0 1 4 11.5 7.5 7.5 0 0 1 12 4a7.5 7.5 0 0 1 8 7.5Z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
+          </div>
+          <h3>真实的人，真实评价</h3>
+          <p>评论来自站内注册用户，一人一评，可以修改和删除。我们保留不同意见，也不隐藏软件的短板。</p>
+        </article>
+        <article class="principle">
+          <span class="principle-no">03</span>
+          <div class="principle-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M5.5 6.5h9a3 3 0 0 1 0 6h-5a3 3 0 0 0 0 6h9"/></svg>
+          </div>
+          <h3>没有暗箱排名</h3>
+          <p>排序只看编辑权重、用户评分和访问热度。没有付费置顶，也没有可以购买的「编辑推荐」。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing section-shell">
+      <div class="closing-copy">
+        <p class="section-kicker">MAKE IT YOURS</p>
+        <h2>连界面的样子，<br>也该由你决定。</h2>
+      </div>
+      <div class="closing-side">
+        <p>深色或浅色、明亮或安静，登录之后偏好会跟着你走。先把它调成顺手的样子，再开始寻找工具。</p>
+        <div class="closing-actions">
+          <button class="button button--primary" type="button" data-open-prefs>个性化外观</button>
+          <div class="mini-swatches" aria-hidden="true">
+            <span style="--swatch:#C7F464"></span>
+            <span style="--swatch:#70E3C3"></span>
+            <span style="--swatch:#FF7A66"></span>
+            <span style="--swatch:#6EB6FF"></span>
+            <span style="--swatch:#B69CFF"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main section-shell">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="回到首页">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none">
+              <path d="M6 25.5c4.2-13.2 7.7 7.4 12.1-3.4 3.4-8.3 6.3 4.2 9.7-5.1" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M7.5 31.5h25" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" opacity=".55"/>
+              <circle cx="31.5" cy="9.5" r="2.1" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="brand-copy">
+            <strong>震纤软件库</strong>
+            <small>ZHENXIAN LIBRARY</small>
+          </span>
+        </a>
+        <p>认真试用，再认真推荐。<br>一本关于好软件的独立策展志。</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <span>探索</span>
+          <button type="button" data-scroll-target="curated">编辑精选</button>
+          <button type="button" data-scroll-target="library">全部软件</button>
+          <button type="button" id="footerFavorites">我的收藏</button>
+        </div>
+        <div>
+          <span>关于</span>
+          <button type="button" data-scroll-target="about">策展原则</button>
+          <button type="button" id="footerPrefs">个性化</button>
+          <button type="button" id="footerLogin">登录 / 注册</button>
+        </div>
+      </div>
+      <div class="footer-status">
+        <span class="status-pill"><i></i> 服务运行中</span>
+        <p>内置微型数据库<br><code>Node.js · SQLite</code></p>
+      </div>
+    </div>
+    <div class="footer-bottom section-shell">
+      <span>© 2026 震纤软件库 · ZHENXIAN LIBRARY</span>
+      <p>本站为非商业独立策展项目。软件名称、商标及相关权利归各自所有者所有。</p>
+      <span class="footer-code">MADE WITH CARE / 震纤</span>
+    </div>
+  </footer>
+
+  <!-- 软件详情 -->
+  <div class="detail-layer" id="detailLayer" hidden>
+    <div class="detail-backdrop" data-close-detail></div>
+    <section class="detail-panel" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <button class="detail-close" type="button" id="detailClose" aria-label="关闭详情">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        <span>关闭</span>
+      </button>
+      <div class="detail-scroll" id="detailScroll">
+        <div id="detailContent" aria-live="polite"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 登录 / 注册 -->
+  <dialog class="dialog auth-dialog" id="authDialog" aria-labelledby="authTitle">
+    <div class="auth-art">
+      <div class="auth-art-top">
+        <span class="auth-mark">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M6 25.5c4.2-13.2 7.7 7.4 12.1-3.4 3.4-8.3 6.3 4.2 9.7-5.1" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="31.5" cy="9.5" r="2.1" fill="currentColor"/>
+          </svg>
+        </span>
+        <span>震纤软件库<br><small>ZHENXIAN LIBRARY</small></span>
+      </div>
+      <div class="auth-art-body">
+        <p class="auth-art-kicker">A QUIET PLACE<br>FOR GOOD SOFTWARE</p>
+        <blockquote>“真正好用的工具，<br>会让你忘记它的存在。”</blockquote>
+        <div class="auth-icon-stack" id="authIconStack" aria-hidden="true"></div>
+      </div>
+      <div class="auth-art-footer">
+        <span>独立策展 · 2026</span>
+        <span class="auth-art-line"></span>
+        <span>VOL. 04</span>
+      </div>
+    </div>
+
+    <div class="auth-panel">
+      <button class="dialog-close" type="button" data-close-dialog="authDialog" aria-label="关闭">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+      <div class="auth-mode-tabs" role="tablist" aria-label="登录或注册">
+        <button class="is-active" type="button" data-auth-mode="login" role="tab" aria-selected="true">登录</button>
+        <button type="button" data-auth-mode="register" role="tab" aria-selected="false">注册</button>
+      </div>
+      <div class="auth-form-wrap">
+        <p class="auth-kicker" id="authKicker">WELCOME BACK</p>
+        <h2 id="authTitle">欢迎回来。</h2>
+        <p class="auth-subtitle" id="authSubtitle">登录后同步你的收藏、评论与个性化设置。</p>
+        <form id="authForm" novalidate>
+          <label class="field">
+            <span>用户名</span>
+            <input id="authUsername" name="username" type="text" autocomplete="username" placeholder="3–20 个字符" maxlength="20" required>
+          </label>
+          <label class="field register-only" id="displayNameField" hidden>
+            <span>昵称 <small>别人看到的名字</small></span>
+            <input id="authDisplayName" name="displayName" type="text" autocomplete="nickname" placeholder="怎么称呼你？" maxlength="24">
+          </label>
+          <label class="field">
+            <span>密码</span>
+            <span class="password-wrap">
+              <input id="authPassword" name="password" type="password" autocomplete="current-password" placeholder="至少 8 个字符" minlength="8" maxlength="72" required>
+              <button type="button" id="passwordToggle">显示</button>
+            </span>
+          </label>
+          <p class="form-message" id="authMessage" role="alert" hidden></p>
+          <button class="button button--primary auth-submit" type="submit" id="authSubmit">登录</button>
+        </form>
+        <div class="demo-box">
+          <div>
+            <span>想直接看看？</span>
+            <strong>demo / demo1234</strong>
+          </div>
+          <button class="demo-button" type="button" id="demoButton">一键体验</button>
+        </div>
+        <p class="auth-note">账号与偏好仅保存在本站内置的微型数据库中。</p>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 个人中心 -->
+  <dialog class="dialog account-dialog" id="accountDialog" aria-labelledby="accountTitle">
+    <button class="dialog-close" type="button" data-close-dialog="accountDialog" aria-label="关闭">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="account-layout">
+      <aside class="account-sidebar">
+        <p class="section-kicker">YOUR SPACE</p>
+        <div class="profile-summary">
+          <span class="avatar avatar--xl" id="accountAvatar">林</span>
+          <h2 id="accountTitle"><span id="accountName">林墨</span><span class="profile-status-dot" title="在线"></span></h2>
+          <p class="account-handle" id="accountHandle">@demo</p>
+          <p class="account-bio" id="accountBio">把工具调成顺手的样子，然后忘记它。</p>
+          <div class="account-stats">
+            <span><strong id="accountFavStat">0</strong> 收藏</span>
+            <span><strong id="accountCommentStat">0</strong> 评价</span>
+            <span><strong id="accountJoinStat">2026</strong> 加入</span>
+          </div>
+        </div>
+        <nav class="account-tabs" aria-label="个人中心栏目">
+          <button class="is-active" type="button" data-account-tab="profile">个人资料</button>
+          <button type="button" data-account-tab="favorites">我的收藏 <span id="accountFavTabCount">0</span></button>
+        </nav>
+        <div class="account-side-actions">
+          <button type="button" id="accountPrefsButton">外观与个性化 <span>↗</span></button>
+          <button type="button" id="accountLogoutButton">退出登录</button>
+        </div>
+      </aside>
+
+      <section class="account-main">
+        <div class="account-panel" data-account-panel="profile">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">PROFILE</p>
+              <h3>个人资料</h3>
+            </div>
+            <p>这些信息会显示在你的评价旁。</p>
+          </div>
+          <form id="profileForm" class="profile-form" novalidate>
+            <label class="field">
+              <span>昵称</span>
+              <input id="profileName" type="text" maxlength="24" autocomplete="nickname" required>
+            </label>
+            <label class="field">
+              <span>个人简介 <small>最多 120 字</small></span>
+              <textarea id="profileBio" rows="3" maxlength="120" placeholder="用一句话介绍自己……"></textarea>
+              <span class="field-counter" id="bioCounter">0 / 120</span>
+            </label>
+            <fieldset class="avatar-colors">
+              <legend>头像颜色</legend>
+              <div id="avatarColorOptions">
+                <button type="button" data-avatar-color="#C7F464" style="--swatch:#C7F464" aria-label="青柠色"><span></span></button>
+                <button type="button" data-avatar-color="#70E3C3" style="--swatch:#70E3C3" aria-label="薄荷色"><span></span></button>
+                <button type="button" data-avatar-color="#FF7A66" style="--swatch:#FF7A66" aria-label="珊瑚色"><span></span></button>
+                <button type="button" data-avatar-color="#6EB6FF" style="--swatch:#6EB6FF" aria-label="天蓝色"><span></span></button>
+                <button type="button" data-avatar-color="#B69CFF" style="--swatch:#B69CFF" aria-label="紫罗兰色"><span></span></button>
+                <button type="button" data-avatar-color="#F5C65B" style="--swatch:#F5C65B" aria-label="琥珀色"><span></span></button>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button class="button button--primary" type="submit" id="profileSubmit">保存修改</button>
+              <span class="form-message" id="profileMessage" role="status"></span>
+            </div>
+          </form>
+          <div class="account-note">
+            <span>账号</span>
+            <code id="accountUsername">@demo</code>
+            <p>用户名用于登录，创建后不可修改。</p>
+          </div>
+        </div>
+
+        <div class="account-panel" data-account-panel="favorites" hidden>
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">SAVED</p>
+              <h3>我的收藏</h3>
+            </div>
+            <p>把想再回来的工具，留在手边。</p>
+          </div>
+          <div class="favorites-grid" id="accountFavorites"></div>
+          <div class="favorites-empty" id="accountFavoritesEmpty" hidden>
+            <span class="empty-heart" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20.8 5.7c-2-2-5.2-2-7.2 0L12 7.3l-1.6-1.6a5.1 5.1 0 0 0-7.2 7.2L12 21l8.8-8.1a5.1 5.1 0 0 0 0-7.2Z"/></svg>
+            </span>
+            <h4>还没有收藏。</h4>
+            <p>在软件详情里点一下心形，就会出现在这里。</p>
+            <button class="button button--ghost" type="button" id="favoritesBrowse">去软件库逛逛</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </dialog>
+
+  <!-- 个性化面板 -->
+  <dialog class="dialog prefs-dialog" id="prefsDialog" aria-labelledby="prefsTitle">
+    <div class="prefs-inner">
+      <header class="prefs-head">
+        <div>
+          <p class="section-kicker">PERSONALIZE</p>
+          <h2 id="prefsTitle">调成你的样子。</h2>
+          <p>偏好即时生效，登录后会同步到你的账号。</p>
+        </div>
+        <button class="dialog-close dialog-close--static" type="button" data-close-dialog="prefsDialog" aria-label="关闭">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </header>
+
+      <div class="prefs-scroll">
+        <fieldset class="pref-group">
+          <legend>界面主题</legend>
+          <div class="theme-options" id="themeOptions">
+            <button type="button" data-pref-theme="dark" aria-pressed="false">
+              <span class="theme-preview theme-preview--dark"><i></i><b></b></span>
+              <span class="theme-label">深夜</span>
+            </button>
+            <button type="button" data-pref-theme="light" aria-pressed="false">
+              <span class="theme-preview theme-preview--light"><i></i><b></b></span>
+              <span class="theme-label">纸白</span>
+            </button>
+            <button type="button" data-pref-theme="system" aria-pressed="false">
+              <span class="theme-preview theme-preview--system"><i></i><b></b></span>
+              <span class="theme-label">跟随系统</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <fieldset class="pref-group">
+          <legend>强调色</legend>
+          <div class="accent-options" id="accentOptions">
+            <button type="button" data-pref-accent="lime" aria-pressed="false"><span style="--swatch:#C7F464"></span>青柠</button>
+            <button type="button" data-pref-accent="mint" aria-pressed="false"><span style="--swatch:#70E3C3"></span>薄荷</button>
+            <button type="button" data-pref-accent="coral" aria-pressed="false"><span style="--swatch:#FF7A66"></span>珊瑚</button>
+            <button type="button" data-pref-accent="sky" aria-pressed="false"><span style="--swatch:#6EB6FF"></span>天蓝</button>
+            <button type="button" data-pref-accent="violet" aria-pressed="false"><span style="--swatch:#B69CFF"></span>紫罗兰</button>
+            <button type="button" data-pref-accent="amber" aria-pressed="false"><span style="--swatch:#F5C65B"></span>琥珀</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="pref-group">
+          <legend>内容密度</legend>
+          <div class="segmented" id="densityOptions">
+            <button type="button" data-pref-density="comfortable" aria-pressed="false">宽适</button>
+            <button type="button" data-pref-density="compact" aria-pressed="false">紧凑</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="pref-group">
+          <legend>界面动效</legend>
+          <div class="segmented" id="motionOptions">
+            <button type="button" data-pref-motion="on" aria-pressed="false">开启</button>
+            <button type="button" data-pref-motion="off" aria-pressed="false">关闭</button>
+          </div>
+        </fieldset>
+
+        <div class="prefs-preview" aria-hidden="true">
+          <div class="prefs-preview-head">
+            <span>实时预览</span>
+            <span class="prefs-preview-dots"><i></i><i></i><i></i></span>
+          </div>
+          <div class="prefs-preview-card">
+            <span class="prefs-preview-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z"/></svg>
+            </span>
+            <span><strong>一个好的开始</strong><small>你的下一件趁手工具</small></span>
+            <b>↗</b>
+          </div>
+        </div>
+      </div>
+
+      <footer class="prefs-footer">
+        <button class="prefs-reset" type="button" id="resetPrefs">恢复默认</button>
+        <p id="prefsSync">偏好保存在本机</p>
+        <button class="button button--primary" type="button" id="prefsDone">完成</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- 确认框 -->
+  <dialog class="dialog confirm-dialog" id="confirmDialog" aria-labelledby="confirmTitle">
+    <div class="confirm-mark" aria-hidden="true">!</div>
+    <p class="section-kicker">PLEASE CONFIRM</p>
+    <h2 id="confirmTitle">确定要删除吗？</h2>
+    <p id="confirmMessage">删除后将无法恢复。</p>
+    <div class="confirm-actions">
+      <button class="button button--ghost" type="button" id="confirmCancel">取消</button>
+      <button class="button button--danger" type="button" id="confirmOk">删除</button>
+    </div>
+  </dialog>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="false"></div>
+
+  <noscript>
+    <div class="noscript">震纤软件库需要启用 JavaScript 才能使用登录、评论和个性化功能。</div>
+  </noscript>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
