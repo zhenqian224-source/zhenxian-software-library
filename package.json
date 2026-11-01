@@ -1,0 +1,22 @@
+{
+  "name": "zhenxian-software-library",
+  "version": "1.0.0",
+  "private": true,
+  "description": "震纤软件库 — 一个内置登录、评论、个性化与微型数据库的独立软件策展网站",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "health": "node scripts/health-check.js"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "keywords": [
+    "software-library",
+    "sqlite",
+    "nodejs",
+    "curation"
+  ],
+  "license": "MIT"
+}
